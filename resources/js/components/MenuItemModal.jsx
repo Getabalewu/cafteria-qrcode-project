@@ -149,18 +149,36 @@ const MenuItemModal = ({ isOpen, onClose, onRefresh, categories, item = null }) 
 
                     <div>
                         <label className="block text-xs font-black text-gray-400 uppercase tracking-widest mb-2">Image (Optional)</label>
-                        <div className="relative">
-                            <input
-                                type="file"
-                                accept="image/*"
-                                onChange={handleFileChange}
-                                className="hidden"
-                                id="image-upload"
-                            />
-                            <label htmlFor="image-upload" className="w-full p-4 bg-gray-50 border-2 border-dashed border-gray-200 rounded-2xl flex items-center justify-center gap-2 cursor-pointer hover:bg-gray-100 transition-colors text-gray-400 font-bold text-sm">
-                                <ImageIcon className="h-5 w-5" />
-                                {formData.image ? formData.image.name : "Choose File..."}
-                            </label>
+                        <div className="flex flex-col gap-4">
+                            {/* Preview Area */}
+                            {(formData.image || (item && item.image)) && (
+                                <div className="relative h-40 w-full rounded-2xl overflow-hidden border border-gray-100 bg-gray-50 flex items-center justify-center group/preview">
+                                    <img
+                                        src={formData.image ? URL.createObjectURL(formData.image) : `/storage/${item.image}`}
+                                        alt="Preview"
+                                        className="w-full h-full object-cover transition-opacity group-hover/preview:opacity-20"
+                                    />
+                                    <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover/preview:opacity-100 transition-opacity">
+                                        <label htmlFor="image-upload" className="cursor-pointer bg-white text-indigo-600 px-4 py-2 rounded-xl font-black text-[10px] uppercase shadow-xl">
+                                            Change Image
+                                        </label>
+                                    </div>
+                                </div>
+                            )}
+
+                            <div className="relative">
+                                <input
+                                    type="file"
+                                    accept="image/*"
+                                    onChange={handleFileChange}
+                                    className="hidden"
+                                    id="image-upload"
+                                />
+                                <label htmlFor="image-upload" className="w-full p-4 bg-gray-50 border-2 border-dashed border-gray-200 rounded-2xl flex items-center justify-center gap-2 cursor-pointer hover:bg-gray-100 transition-colors text-gray-400 font-bold text-sm">
+                                    <ImageIcon className="h-5 w-5" />
+                                    {formData.image ? formData.image.name : "Choose New Photo..."}
+                                </label>
+                            </div>
                         </div>
                     </div>
 

@@ -177,31 +177,52 @@ const Menu = () => {
             </div>
 
             {/* Menu Items */}
-            <main className="max-w-4xl mx-auto p-4 grid grid-cols-1 md:grid-cols-2 gap-4 pt-6">
+            <main className="max-w-4xl mx-auto p-4 grid grid-cols-1 md:grid-cols-2 gap-6 pt-6">
                 {filteredItems.length > 0 ? (
                     filteredItems.map(item => (
-                        <div key={item.id} className="bg-white rounded-2xl shadow-sm overflow-hidden border border-gray-100 hover:shadow-xl hover:border-indigo-100 transition-all duration-300 group">
-                            <div className="p-5">
-                                <div className="flex justify-between items-start mb-2">
-                                    <h3 className="font-extrabold text-lg text-gray-800 group-hover:text-indigo-600 transition-colors">{item.name}</h3>
-                                    <span className="text-indigo-600 font-black text-lg">${Number(item.price).toFixed(2)}</span>
-                                </div>
-                                <p className="text-sm text-gray-500 leading-relaxed min-h-[40px] mb-4">{item.description}</p>
-                                <div className="flex justify-between items-center bg-gray-50 rounded-xl p-2 pr-1">
-                                    <span className={`text-[10px] font-black uppercase px-2 py-1 rounded-md ${item.availability ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'
+                        <div key={item.id} className="bg-white rounded-[2rem] shadow-sm overflow-hidden border border-gray-100 hover:shadow-2xl hover:border-indigo-100 transition-all duration-500 group">
+                            {/* Image Header */}
+                            <div className="h-48 bg-gray-100 relative overflow-hidden">
+                                {item.image ? (
+                                    <img
+                                        src={`/storage/${item.image}`}
+                                        alt={item.name}
+                                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                                    />
+                                ) : (
+                                    <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-indigo-50 to-indigo-100">
+                                        <Utensils className="h-12 w-12 text-indigo-200" />
+                                    </div>
+                                )}
+                                <div className="absolute top-4 right-4">
+                                    <span className={`text-[10px] font-black uppercase px-3 py-1.5 rounded-full shadow-lg backdrop-blur-md ${item.availability ? 'bg-white/90 text-green-600' : 'bg-red-500 text-white'
                                         }`}>
-                                        {item.availability ? 'Freshly Made' : 'Sold Out'}
+                                        {item.availability ? 'Available' : 'Sold Out'}
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div className="p-6">
+                                <div className="flex justify-between items-start mb-2">
+                                    <h3 className="font-black text-xl text-gray-800 group-hover:text-indigo-600 transition-colors tracking-tight">{item.name}</h3>
+                                    <span className="text-indigo-600 font-extrabold text-xl font-mono">${Number(item.price).toFixed(2)}</span>
+                                </div>
+                                <p className="text-sm text-gray-500 leading-relaxed min-h-[40px] mb-6 line-clamp-2">{item.description}</p>
+
+                                <div className="flex justify-between items-center bg-gray-50 rounded-2xl p-2 pl-4">
+                                    <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">
+                                        Qty: 1
                                     </span>
                                     <button
                                         onClick={() => addToCart(item)}
                                         disabled={!item.availability}
-                                        className={`flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-black uppercase tracking-wider transition-all ${item.availability
-                                            ? 'bg-indigo-600 text-white hover:bg-indigo-700 active:scale-95 shadow-lg shadow-indigo-100'
+                                        className={`flex items-center gap-3 px-6 py-3 rounded-xl text-xs font-black uppercase tracking-widest transition-all ${item.availability
+                                            ? 'bg-indigo-600 text-white hover:bg-indigo-700 active:scale-95 shadow-xl shadow-indigo-100'
                                             : 'bg-gray-200 text-gray-400 cursor-not-allowed'
                                             }`}
                                     >
-                                        <Plus className="h-3 w-3" />
-                                        Add
+                                        <Plus className="h-4 w-4" />
+                                        Add to Tray
                                     </button>
                                 </div>
                             </div>

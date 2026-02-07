@@ -26,16 +26,9 @@ const App = () => {
                 <Route path="/menu" element={<CustomerMenu />} />
                 <Route path="/order/:id" element={<OrderStatus />} />
 
-                {/* Staff Routes */}
-                <Route path="/staff" element={
-                    <ProtectedRoute allowedRoles={['Staff', 'Admin']}>
-                        <StaffDashboard />
-                    </ProtectedRoute>
-                } />
-
-                {/* Admin Routes */}
+                {/* Unified Dashboard (Admin & Staff) */}
                 <Route path="/admin/*" element={
-                    <ProtectedRoute allowedRoles={['Admin']}>
+                    <ProtectedRoute allowedRoles={['Admin', 'Staff']}>
                         <AdminPanel />
                     </ProtectedRoute>
                 } />

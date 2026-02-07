@@ -14,16 +14,32 @@ Route::get('/user', function (Request $request) {
 })->middleware('auth:sanctum');
 
 // Menu Routes
-Route::apiResource('categories', CategoryController::class);
-Route::apiResource('menu-items', MenuItemController::class);
+Route::apiResource('categories', CategoryController::class)->only(['index', 'show']);
+Route::apiResource('menu-items', MenuItemController::class)->only(['index', 'show']);
 
-// Order & Payment Routes
-Route::apiResource('orders', OrderController::class);
-Route::post('payments', [PaymentController::class, 'store']);
-Route::get('payments/{payment}', [PaymentController::class, 'show']);
+// Operational Routes (Admin & Staff)
+Route::middleware(['auth:sanctum'])->group(function () {
+    // Menu Availability Toggle (Role check inside Controller)
+    Route::put('menu-items/{menuItem}', [MenuItemController::class, 'update']);
+    
+    // Protected Order & Payment Management
+    Route::apiResource('orders', OrderController::class);
+    Route::post('payments', [PaymentController::class, 'store']);
+    Route::get('payments/{payment}', [PaymentController::class, 'show']);
+});
 
-// Admin Routes
-Route::middleware('auth:sanctum')->prefix('admin')->group(function () {
+// Admin-Only Structure Management
+Route::middleware(['auth:sanctum', 'admin'])->group(function () {
+    Route::post('categories', [CategoryController::class, 'store']);
+    Route::put('categories/{category}', [CategoryController::class, 'update']);
+    Route::delete('categories/{category}', [CategoryController::class, 'destroy']);
+
+    Route::post('menu-items', [MenuItemController::class, 'store']);
+    Route::delete('menu-items/{menuItem}', [MenuItemController::class, 'destroy']);
+});
+
+// Admin-Only Dashboard & Management
+Route::middleware(['auth:sanctum', 'admin'])->prefix('admin')->group(function () {
     Route::post('generate-qr', [AdminController::class, 'generateQrCode']);
     Route::get('reports', [AdminController::class, 'reports']);
     
