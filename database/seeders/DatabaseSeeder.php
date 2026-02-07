@@ -17,9 +17,25 @@ class DatabaseSeeder extends Seeder
     {
         // User::factory(10)->create();
 
+        // Admin User
         User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
+            'name' => 'System Administrator',
+            'email' => 'admin@example.com',
+            'password' => \Illuminate\Support\Facades\Hash::make('password'), // explicitly setting password for clarity
+            'role' => 'Admin',
+        ]);
+
+        // Staff User
+        User::factory()->create([
+            'name' => 'Staff Member',
+            'email' => 'staff@example.com',
+            'password' => \Illuminate\Support\Facades\Hash::make('password'),
+            'role' => 'Staff',
+        ]);
+        // Run seeders
+        $this->call([
+            MenuSeeder::class,
         ]);
     }
 }
+
