@@ -77,7 +77,7 @@ const AdminPanel = () => {
                         <div className="bg-indigo-600 p-2 rounded-xl text-white">
                             <ChefHat className="h-6 w-6" />
                         </div>
-                        <h1 className="text-2xl font-black text-indigo-900 tracking-tighter italic">OPS.CENTER</h1>
+                        <h1 className="text-2xl font-black text-indigo-900 tracking-tighter italic">ኢትዮ <span className="text-indigo-600">chafe</span></h1>
                     </div>
 
                     <nav className="space-y-1">
@@ -293,7 +293,7 @@ const OrdersView = () => {
         <div className="animate-in fade-in slide-in-from-bottom-5 duration-500">
             <header className="flex justify-between items-center mb-10">
                 <div>
-                    <h2 className="text-3xl font-black tracking-tight italic">KITCHEN.OPS</h2>
+                    <h2 className="text-3xl font-black tracking-tight italic">ኢትዮ <span className="text-indigo-600">chafe</span> <span className="text-slate-300 ml-2">/kitchen</span></h2>
                     <p className="text-gray-500 font-medium uppercase text-[10px] tracking-[0.2em] mt-1">Live Order Execution Stream</p>
                 </div>
                 <div className="flex gap-4 items-center">

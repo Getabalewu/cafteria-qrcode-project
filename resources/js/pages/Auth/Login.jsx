@@ -57,8 +57,8 @@ const Login = () => {
                     <div className="bg-indigo-600 p-4 rounded-2xl shadow-lg shadow-indigo-500/20 mb-4">
                         <ShieldCheck className="h-8 w-8 text-white" />
                     </div>
-                    <h1 className="text-2xl font-black text-white tracking-tight">SECURE ACCESS</h1>
-                    <p className="text-slate-400 text-sm font-bold uppercase tracking-widest mt-1">Management Portal</p>
+                    <h1 className="text-3xl font-black text-white tracking-tight">ኢትዮ <span className="text-indigo-400">chafe</span></h1>
+                    <p className="text-slate-400 text-[10px] font-black uppercase tracking-[0.2em] mt-2">Staff Access Portal</p>
                 </div>
 
                 {error && (
